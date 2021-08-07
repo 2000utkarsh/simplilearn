@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block content %}
+    <style>
+        .img-home{
+            width:300px !important;   
+            height:300px !important;
+            transition: transform .5s ease;
+        }
+        .img-home:hover{
+            transform: scale3d(1.2,1.2,1.2) ;
+        }
+    </style>
+    
+    <br><br><br><br>
+    <center><i><h1 style="color: brown; font-family:Georgia, 'Times New Roman', Times, serif;">Welcome to Simpli Learn</h1></i></center><br>
+    <center><i><h2 style="color: brown; font-family:Georgia, 'Times New Roman', Times, serif;"><strong>Online Portal</strong></h2></i></center>
+    <center><img src="{% static 'img/webkiosk.png' %}" alt="" class="img-home"></center>
+
+    {% endblock %}              
+    

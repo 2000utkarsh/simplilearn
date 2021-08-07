@@ -1,0 +1,41 @@
+table thead tr th {
+    vertical-align: middle !important;
+    text-align: center !important;
+    font-size: 1.2em;
+}
+
+table tbody tr td {
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+.checkbox-div{
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+}
+.select-label{
+    font-size: 1.5em;
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+
+.select_all_checkbox{
+    height: 20px;
+    width: 20px;
+    grid-column-start: 5;
+    grid-column-end: 6;
+    margin-top: 7px;
+    margin-left: -15px;
+}
+.deselect-label{
+    font-size: 1.5em;
+    grid-column-start: 6;
+    grid-column-end: 7;
+    
+}
+.deselect_all_checkbox{
+    height: 20px;
+    width: 20px;
+    grid-column-start: 7;
+    grid-column-end: 8;
+    margin-top: 7px;
+}

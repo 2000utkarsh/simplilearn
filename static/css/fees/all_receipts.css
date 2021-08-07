@@ -1,0 +1,44 @@
+table thead tr th, table tbody tr td{
+    vertical-align: middle !important;
+    text-align: center;
+}
+    
+th, td, td a{
+    font-size: 20px;
+}
+.receipt_no, .approved{
+    background-color: #03b488 !important;
+	border-radius: 5px;
+	height: 35px !important;
+	width: 105px;
+	margin: 10px !important;
+    transition: transform 0.5s ease;
+    outline: none;
+	border: none;
+}
+
+.cancelled{
+    background-color: #dd2f2f !important;
+	border-radius: 5px;
+	height: 35px !important;
+	width: 105px;
+	margin: 10px !important;
+    transition: transform 0.5s ease;
+    outline: none;
+    border: none;
+    color: #fff;
+}
+
+.receipt_no:hover, .approved:hover{
+    background-image: linear-gradient(to right, #1258f0, #1272f0);
+	border-radius: 5px;
+	margin: 10px !important;
+    transform: scale3d(1.5,1.5,1.5);
+    color: #fff;
+    text-decoration: none;
+}
+.receipt_no a, .approved a{
+    color: #fff;
+    text-align: center;
+    font-size: 1.2em;
+}

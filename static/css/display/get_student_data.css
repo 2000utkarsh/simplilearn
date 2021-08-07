@@ -1,0 +1,45 @@
+body{
+    background-color: seagreen !important;
+}
+input, select {
+    height: 40px !important;
+}
+
+input[type=checkbox] {
+    height: 25px !important;
+}
+
+input[type=checkbox]:checked {
+    height: 25px !important;
+    background-color: black !important;
+}
+
+label:hover:before {
+    border: 2px solid #4778d9 !important;
+}
+
+table tbody tr td {
+    vertical-align: middle !important;
+    text-align: center !important;
+    color: #fff;
+}
+
+table thead tr th {
+    text-align: center !important;
+}
+
+.master-checkbox, .deselct {
+    height: 25px !important;
+}
+
+.master-form{
+    display: grid;
+    grid-template-columns: 800px !important;
+    margin-left: 24vw;
+}
+
+@media only screen and (max-width:676px){
+    .master-form{
+        margin-left: 15vw;
+    }
+}

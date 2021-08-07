@@ -1,0 +1,31 @@
+table thead tr th, table tbody tr td{
+    vertical-align: middle !important;
+    text-align: center;
+}
+.deposit_fees, .fees_receipts{
+    background-color: #03b488;
+	border-radius: 5px;
+	height: 35px !important;
+	width: 85px;
+	margin: 10px !important;
+    transition: transform 0.5s ease;
+    outline: none;
+    border: none;
+    color: #fff;
+}
+.deposit_fees-td{
+    margin-left: 20px !important;
+}
+
+.deposit_fees:hover, .fees_receipts:hover{
+    background-image: linear-gradient(to right, #1258f0, #1272f0);
+	border-radius: 5px;
+	margin: 10px !important;
+    transform: scale3d(1.5,1.5,1.5);
+    color: #fff;
+    text-decoration: none;
+}
+
+a{
+    color: #fff !important;
+}
