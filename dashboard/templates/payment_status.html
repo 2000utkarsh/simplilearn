@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+    body {
+        background-image: linear-gradient(to right, rgb(150, 206, 236), rgb(197, 230, 221));
+    }
+
+    .payment-status {
+        margin-top: 80px;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .payment-success {
+        font-size: 30px;
+        text-align: center;
+        color: green;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<h1 class="ml-3 mt-5 payment-status">Payment Status Regarding your order Id {{response.ORDERID}}</h1>
+{% if status == '01' %}
+<br><br><br><br><br>
+<center>
+    <h3 class="h3-head">You are almost there !!</h3>
+</center>
+<br><br>
+<!-- <center><button class="btn btn-success complete-button" onclick="submit_fun()">Click here to Complete Transaction</button></center> -->
+<h3 class="mt-4 ml-3 payment-success">PAYMENT SUCCESSFUL</h3>
+
+<br><br>
+<center><img src="{% static 'img/green-tick.png' %}" style="width: 150px; height: 120px;" alt=""></center>
+<h1><a href="{% url 'webkiosk:generate_online_receipt' student_pk=student.pk receipt_no=receipt_no %}">Click here to
+        Generate Receipt</a></h1>
+{% else %}
+ORDER FAILIURE
+{{response}}
+{% endif %}
+
+
+<script type="text/javascript">
+    function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
+
+    $(document).ready(function () {
+        $(document).on("keydown", disableF5);
+    });
+
+    var message = "Function Disabled!";
+    ///////////////////////////////////
+    function clickIE4() {
+        if (event.button == 2) {
+            alert(message);
+            return false;
+        }
+    }
+    function clickNS4(e) {
+        if (document.layers || document.getElementById && !document.all) {
+            if (e.which == 2 || e.which == 3) {
+                alert(message);
+                return false;
+            }
+        }
+    }
+    if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = clickNS4;
+    }
+    else if (document.all && !document.getElementById) {
+        document.onmousedown = clickIE4;
+    }
+    document.oncontextmenu = new Function("alert(message);return false")
+</script>
+{% endblock %}

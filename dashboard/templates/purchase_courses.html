@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" 
+         role="status" id="loading">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<center><h1>Available Courses</h1></center>
+<!-- table for showing data -->
+<div id="container"></div>
+<script>
+    const api_url = 
+        'https://s3-ap-southeast-1.amazonaws.com/he-public-data/courses26269ff.json';
+
+  
+// Defining async function
+async function getapi(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    console.log(data);
+    if (response) {
+        hideloader();
+    }
+    
+    show(data);
+}
+// Calling that async function
+getapi(api_url);
+
+function hideloader() {
+    document.getElementById('loading').style.display = 'none';
+}
+
+function show(data) {
+    
+    let tab = 
+        `<center><tr>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Thumbnail</th>
+          <th>Price</th>
+         </tr>`;
+    
+    // Loop to access all rows 
+    counter = 1;
+    for (let r of Object.values(data)) {
+        tab += `<tr class= 'row - ${counter}'> 
+    <td>${r.id} </td>
+    <td>${r.title}</td>
+    <td id = 'cell - ${counter}'></td> 
+    <td>${r.price}</td>      
+</tr></center>`;
+    
+    counter++;
+    }
+    // Setting innerHTML as tab variable
+    counter = 1;
+    document.getElementById("courses").innerHTML = tab;
+    
+    for (let r of Object.values(data)) {
+        var img = document.createElement('img');
+        img.src = r.thumbnailURL;
+        img.height = 200;
+        img.width = 300;
+        var temp= 'cell - ' + counter;
+        document.getElementById(temp).appendChild(img);
+        counter++;
+    }
+}
+
+function show(data){
+    var counter = 1;
+    const container = document.getElementById('container');
+    var total_size = Object.values(data).length;
+    for (var i = 0 ; i < total_size; i+=3) {
+    var v = i;
+    let r = Object.values(data)[i];
+    const content = `
+    <br>
+    <center><div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <center><img class="card-img-top" style = "height: 200px; width:100%;"src="${Object.values(data)[i].thumbnailURL}" alt="Card image cap"></center>
+                <div class="card-body">
+                    <h5 class="card-title">${Object.values(data)[i].title}</h5>
+                    <p class="card-text">Price: Rs. ${Object.values(data)[i].price}</p>
+                    <a href="javascript:void(0)" onclick = "MakeRequest(${i}, ${Object.values(data)[i].price})" class="btn btn-primary" style = "background:  green;">Buy This Course</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <center><img class="card-img-top" style = "height: 200px; width:100%;"src="${Object.values(data)[i+1].thumbnailURL}" alt="Card image cap"></center>
+                <div class="card-body">
+                    <h5 class="card-title">${Object.values(data)[i + 1].title}</h5>
+                    <p class="card-text">Price: Rs. ${Object.values(data)[i + 1].price}</p>
+                    <a href="javascript:void(0)" onclick = "MakeRequest(${i + 1}, ${Object.values(data)[i + 1].price})" class="btn btn-primary" style = "background:  green;">Buy This Course</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <center><img class="card-img-top" style = "height: 200px; width:100%;"src="${Object.values(data)[i+2].thumbnailURL}" alt="Card image cap"></center>
+                <div class="card-body">
+                    <h5 class="card-title">${Object.values(data)[i + 2].title}</h5>
+                    <p class="card-text">Price: Rs. ${Object.values(data)[i + 2].price}</p>
+                    <a href="javascript:void(0)" onclick = "MakeRequest(${i + 2},  ${Object.values(data)[i + 2].price})" class="btn btn-primary" style = "background:  green;">Buy This Course</a>
+                </div>
+            </div>
+        </div>
+    </div></center>
+    <br><br>
+  `;
+    counter++;
+    container.innerHTML += content;
+    }
+}
+
+const MakeRequest = (id, amount) => {
+    $.ajax({
+        url: "make_payment",
+        method: 'POST',
+        data: {
+            'id': id,
+            'amount': amount,
+        },
+        dataType: 'json',
+        success: function(){
+            console.log("success");
+        }
+        
+    });
+}
+</script>
+{% endblock %}
