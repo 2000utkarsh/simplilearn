@@ -90,7 +90,7 @@ function show(data){
                 <div class="card-body">
                     <h5 class="card-title">${Object.values(data)[i].title}</h5>
                     <p class="card-text">Price: Rs. ${Object.values(data)[i].price}</p>
-                    <a href="javascript:void(0)" onclick = "MakeRequest(${i}, ${Object.values(data)[i].price})" class="btn btn-primary" style = "background:  green;">Buy This Course</a>
+                    <a href="http://127.0.0.1:8000/dashboard/make_payment/${i}/${Object.values(data)[i].price}" onclick = "MakeRequest(${i}, ${Object.values(data)[i].price})" class="btn btn-primary" style = "background:  green;">Buy This Course</a>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@ function show(data){
                 <div class="card-body">
                     <h5 class="card-title">${Object.values(data)[i + 1].title}</h5>
                     <p class="card-text">Price: Rs. ${Object.values(data)[i + 1].price}</p>
-                    <a href="javascript:void(0)" onclick = "MakeRequest(${i + 1}, ${Object.values(data)[i + 1].price})" class="btn btn-primary" style = "background:  green;">Buy This Course</a>
+                    <a href="http://127.0.0.1:8000/dashboard/make_payment/${i + 1}/${Object.values(data)[i + 1].price}" onclick = "MakeRequest(${i + 1}, ${Object.values(data)[i + 1].price})" class="btn btn-primary" style = "background:  green;">Buy This Course</a>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@ function show(data){
                 <div class="card-body">
                     <h5 class="card-title">${Object.values(data)[i + 2].title}</h5>
                     <p class="card-text">Price: Rs. ${Object.values(data)[i + 2].price}</p>
-                    <a href="javascript:void(0)" onclick = "MakeRequest(${i + 2},  ${Object.values(data)[i + 2].price})" class="btn btn-primary" style = "background:  green;">Buy This Course</a>
+                    <a href="http://127.0.0.1:8000/dashboard/make_payment/${i + 2}/${Object.values(data)[i + 2].price}" onclick = "MakeRequest(${i + 2},  ${Object.values(data)[i + 2].price})" class="btn btn-primary" style = "background:  green;">Buy This Course</a>
                 </div>
             </div>
         </div>

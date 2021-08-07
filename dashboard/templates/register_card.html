@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<br><br>
+
+<center>
+    <h2><strong>Enter Credentials For Card Registration</strong> </h2>
+</center>
+<br><br>
+<center>
+
+
+    <div class="form-div"
+        style="width: 700px;background-color: rgb(25, 103, 139); margin-left: 50px; border-radius: 20px;">
+        <br>
+        <form style=" margin-left: 0px; width: 550px; text-align: left;" method="POST">
+            {% csrf_token %}
+            <div class="form-nest-div-1">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"
+                        style="color: rgb(255, 251, 0); font-weight: 600; font-size: 1.15em;">First Name</label>
+                    {{form.name_on_card|add_class:'form-control'}}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"
+                        style="color: rgb(255, 251, 0); font-weight: 600; font-size: 1.15em;">Last Name</label>
+                    {{form.card_bank|add_class:'form-control'}}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"
+                        style="color: rgb(255, 251, 0); font-weight: 600; font-size: 1.15em;">Email Address
+                    </label>
+                    {{form.card_number|add_class:'form-control'}}
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1"
+                        style="color: rgb(255, 251, 0); font-weight: 600; font-size: 1.15em;">Username
+                    </label>
+                    {{form.expiry_month|add_class:'form-control'}}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"
+                        style="color: rgb(255, 251, 0); font-weight: 600; font-size: 1.15em;">Password
+                    </label>
+                    {{form.expiry_year|add_class:'form-control'}}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"
+                        style="color: rgb(255, 251, 0); font-weight: 600; font-size: 1.15em;">Password Confirmation
+                    </label>
+                    {{form.card_type|add_class:'form-control'}}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"
+                        style="color: rgb(255, 251, 0); font-weight: 600; font-size: 1.15em;">Password Confirmation
+                    </label>
+                    {{form.otp|add_class:'form-control'}}
+                </div>
+                
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <input type="submit" class="btn" value="Submit"
+                style="background: rgb(255, 198, 10); color: #000; font-weight: 600;">
+        </form>
+    </div>
+</center>
+<br><br>
+
+{% endblock %}

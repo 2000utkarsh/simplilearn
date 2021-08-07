@@ -35,8 +35,7 @@
 
 <br><br>
 <center><img src="{% static 'img/green-tick.png' %}" style="width: 150px; height: 120px;" alt=""></center>
-<h1><a href="{% url 'webkiosk:generate_online_receipt' student_pk=student.pk receipt_no=receipt_no %}">Click here to
-        Generate Receipt</a></h1>
+
 {% else %}
 ORDER FAILIURE
 {{response}}
