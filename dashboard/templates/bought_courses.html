@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status" id="loading">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<center>
+    <h1>Available Courses</h1>
+</center>
+<!-- table for showing data -->
+<div id="container">
+    
+</div>
+<script>
+    const api_url =
+        'https://s3-ap-southeast-1.amazonaws.com/he-public-data/courses26269ff.json';
+
+
+    // Defining async function
+    async function getapi(url) {
+
+        // Storing response
+        const response = await fetch(url);
+
+        // Storing data in form of JSON
+        var data = await response.json();
+        console.log(data);
+        if (response) {
+            hideloader();
+        }
+
+        show(data);
+    }
+    // Calling that async function
+    getapi(api_url);
+
+    function hideloader() {
+        document.getElementById('loading').style.display = 'none';
+    }
+
+    function show(data) {
+
+        var counter = 1;
+        const container = document.getElementById('container');
+        var total_size = Object.values(data).length;
+        var json_data = JSON.parse("{{data|escapejs}}");
+        json_data = Object.values(json_data)
+        
+        var row_number = 0;
+        for (var i = 0; i < total_size; i++) {
+            var row_content = "";
+            let r = Object.values(data)[i];
+            check = (i + 1).toString();
+            if(i % 3 == 0){ 
+                row_content = `
+                <br><br><br>
+                <center>
+                    <div class="row" id = "row-${i / 3}"></div>
+                </center>
+                `
+                container.innerHTML+=row_content
+            }
+            
+            var find_index = json_data.findIndex(element => element == i + 1);
+            if(find_index != -1){
+                const content = `
+
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <center><img class="card-img-top" style = "height: 200px; width:100%;"src="${Object.values(data)[i].thumbnailURL}" alt="Card image cap"></center>
+                        <div class="card-body">
+                            <h5 class="card-title">${Object.values(data)[i].title}</h5>
+                            <p class="card-text">Price: Rs. ${Object.values(data)[i].price}</p>
+                            <a href="http://127.0.0.1:8000/dashboard/view_course/${i + 1}/" class="btn btn-primary" style = "background:  green;">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                
+  `;
+
+                const current_row = document.getElementById('row-'+Math.floor(i / 3));
+                current_row.innerHTML += content;
+            }
+            
+            counter++;
+            
+        }
+    }
+
+    const MakeRequest = (id, amount) => {
+        $.ajax({
+            url: "make_payment",
+            method: 'POST',
+            data: {
+                'id': id,
+                'amount': amount,
+            },
+            dataType: 'json',
+            success: function () {
+                console.log("success");
+            }
+
+        });
+    }
+</script>
+{% endblock %}

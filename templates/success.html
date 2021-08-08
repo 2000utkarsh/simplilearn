@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
-{% if response is 'signup_success' %}
+
 {% block content %}
 
 <br><br>
-<center><h2 style = "color: green">User Created Successfully</h2>
-{% endblock %}
+<br><br>
+{% if response is 'signup_success' %}
+<center><h2 style = "color: green">{{success}}</h2>
+
+{% else %}
+<center><h2 style = "color: green">{{success}}</h2>
 {% endif %}
+{% endblock %}
+
 
 

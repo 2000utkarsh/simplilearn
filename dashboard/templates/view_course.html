@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" 
+         role="status" id="loading">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<center><h1>Available Courses</h1></center>
+<div id="container">
+    <br><br>
+    <center><div id="video"></div></center>
+</div>
+<script>
+    const api_url = 
+        'https://s3-ap-southeast-1.amazonaws.com/he-public-data/courses26269ff.json';
+
+  
+// Defining async function
+async function getapi(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    console.log(data);
+    if (response) {
+        hideloader();
+    }
+    
+    show(data);
+}
+// Calling that async function
+getapi(api_url);
+
+function hideloader() {
+    document.getElementById('loading').style.display = 'none';
+}
+
+
+function show(data) {
+
+var counter = 0;
+const container = document.getElementById('container');
+var total_size = Object.values(data).length;
+var json_data = JSON.parse("{{data|escapejs}}");
+    json_data = Object.values(json_data)
+    
+    
+    video_link = Object.values(data)[json_data[0] - 1]
+    
+    for (var i = 0; i < video_link.videoLink.length; i++){
+
+        video_link_temp = video_link.videoLink[i]
+
+        console.log(video_link_temp)
+        var ifrm = document.createElement("iframe"); 
+        video_id = video_link_temp.split("https://youtu.be/")[1]
+        video_link_updated = "https://www.youtube.com/embed/" +  video_id
+        
+        ifrm.setAttribute("src", video_link_updated);
+        ifrm.autostart = false
+        
+        ifrm.style.width = `1000px`;
+        ifrm.style.height = `500px`;
+        ifrm.style.border = 'none';
+        document.querySelector('#video').appendChild(ifrm);
+    }
+    
+
+}
+</script>
+{% endblock %}

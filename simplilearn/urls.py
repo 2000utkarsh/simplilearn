@@ -25,7 +25,8 @@ urlpatterns = [
     path('', views.Home, name = 'home'),
     path('accounts/', include('accounts.urls')),
     path('dashboard/', include('dashboard.urls')),
-    
+    path('fault/<slug:fault>', views.Fault, name = 'fault'),
+
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('reset_password/', auth_views.PasswordResetView.as_view(), name = 'reset_password'),

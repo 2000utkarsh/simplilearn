@@ -20,7 +20,7 @@ def SignUp(request):
 
 
             user = authenticate(username=username, password = password)
-            return render(request, 'success.html', {'response': 'signup_success'})
+            return render(request, 'success.html', {'success': 'User Created Successfully','response': 'signup_success'})
     else:
         form = forms.SignUpForm()
          
